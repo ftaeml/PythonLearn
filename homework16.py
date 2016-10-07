@@ -22,14 +22,8 @@ class Shape(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, x = 0, y = 0, length = 0):
-        self.__x = x
-        self.__y = y
-        self.__length = length
-
-    @abstractmethod
     def show(self):
-        print( x = ',self.__x,'y = ',self.__y,'length = ',self.__length)
+        print( 'x = ',self.__x,'y = ',self.__y,'length = ',self.__length)
 
     @abstractmethod
     def save(self,file):
@@ -45,18 +39,7 @@ class Shape(metaclass=ABCMeta):
             self.__y = prop[1]
             self.__length = prop[2]
    
-    @abstractproperty
-    def x(self):
-        return self.__x
-
-    @abstractproperty
-    def y(self):
-        return self.__y
-
-    @abstractproperty
-    def length(self):
-        return self.__length
-
+    
 class Square(Shape):
     """
     Square  - класс, производный от Square, который описывает квадрат и
@@ -100,9 +83,28 @@ class Square(Shape):
     >>> s.length
     30
     """
-    def show(self)
+     
+    def __init__(self, point, length = 0):
+        self.__x = point[0]
+        self.__y = point[1]
+        self.__length = length
+
+    @property
+    def x(self):
+        x = self.__x
+
+    @property
+    def y(self):
+        y = self.__y
+
+    @property
+    def length(self):
+        length = self.__length     
+    
+    def show(self):
         print('Квадрат: ' + super.show())         
 
 if __name__ == "__main__":
     testmod()
+
 
