@@ -22,34 +22,28 @@ class Shape(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, name, x, y, length):
-        self.__name = name
+    def __init__(self, x = 0, y = 0, length = 0):
         self.__x = x
         self.__y = y
         self.__length = length
 
     @abstractmethod
     def show(self):
-        print( self.__name,': x = ',self.__x,'y = ',self.__y,'length = ',self.__length)
+        print( x = ',self.__x,'y = ',self.__y,'length = ',self.__length)
 
     @abstractmethod
     def save(self,file):
-        pass
-
+        with open(file, 'w') as f:
+            f.write(self.__x \n self.__y \n self.__length)    
+           
     @abstractmethod
     def load(self,file):
         with open(file) as f:
-            self.__name = f.read([0])
-            self.__x = f.readlines()
-            self.__y = f.readlines()
-            self.__length = f.readlines()
-
-
-
-    @abstractproperty
-    def name(self):
-        return self.__name
-
+            prop = f.read()
+            self.__x = prop[0]
+            self.__y = prop[1]
+            self.__length = prop[2]
+   
     @abstractproperty
     def x(self):
         return self.__x
@@ -105,7 +99,8 @@ class Square(Shape):
     >>> s.length
     30
     """
-    pass
+    def show(self)
+        print('Квадрат: ' + super.show())         
 
 if __name__ == "__main__":
     testmod()
