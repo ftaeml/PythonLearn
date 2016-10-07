@@ -34,7 +34,7 @@ class Shape(metaclass=ABCMeta):
     @abstractmethod
     def save(self,file):
         with open(file, 'w') as f:
-            to_string = self.__x + \n +self.__y + \n + self.__length  
+            to_string = str(self.__x) + \n +str(self.__y) + \n + str(self.__length)  
             f.write(to_string)    
            
     @abstractmethod
