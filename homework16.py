@@ -21,6 +21,11 @@ class Shape(metaclass=ABCMeta):
     TypeError: Can't instantiate abstract class Shape with abstract methods load, save, show
     """
 
+     def __init__(self, point, length = 0):
+        self.__x = point[0]
+        self.__y = point[1]
+        self.__length = length
+        
     @abstractmethod
     def show(self):
         print( 'x = ',self.__x,'y = ',self.__y,'length = ',self.__length)
@@ -99,10 +104,24 @@ class Square(Shape):
 
     @property
     def length(self):
-        length = self.__length     
-    
+        length = self.__length
+        
     def show(self):
-        print('Квадрат: ' + super.show())         
+        print( 'x = ',self.__x,'y = ',self.__y,'length = ',self.__length)
+
+    def save(self,file):
+        with open(file, 'w') as f:
+            to_string = str(self.__x) + '\n' +str(self.__y) + '\n' + str(self.__length)  
+            f.write(to_string)    
+          
+    def load(self,file):
+        with open(file) as f:
+            prop = f.read()
+            self.__x = prop[0]
+            self.__y = prop[1]
+            self.__length = prop[2]
+    
+             
 
 if __name__ == "__main__":
     testmod()
