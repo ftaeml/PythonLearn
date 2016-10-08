@@ -1,8 +1,7 @@
-##Арєп’єв Євген
-##homework16
 import os
 from doctest import testmod
 from abc import abstractmethod, abstractproperty, ABCMeta
+
 
 class Shape(metaclass=ABCMeta):
     """
@@ -21,30 +20,30 @@ class Shape(metaclass=ABCMeta):
     TypeError: Can't instantiate abstract class Shape with abstract methods load, save, show
     """
 
-     def __init__(self, point, length = 0):
-        self.__x = point[0]
-        self.__y = point[1]
+    def __init__(self, point=(0, 0), length=0):
+        self.__x = x
+        self.__y = y
         self.__length = length
-        
-    @abstractmethod
-    def show(self):
-        print( 'x = ',self.__x,'y = ',self.__y,'length = ',self.__length)
 
     @abstractmethod
-    def save(self,file):
-        with open(file, 'w') as f:
-            to_string = str(self.__x) + '\n' +str(self.__y) + '\n' + str(self.__length)  
-            f.write(to_string)    
-           
+    def show(self):
+        print('x = ', self.__x, ', y = ', self.__y, ', length = ', self.__length)
+
     @abstractmethod
-    def load(self,file):
+    def save(self, file):
+        with open(file, 'w') as f:
+            to_string = str(self.__x) + ' ' + str(self.__y) + ' ' + str(self.__length)
+            f.write(to_string)
+
+    @abstractmethod
+    def load(self, file):
         with open(file) as f:
             prop = f.read()
-            self.__x = prop[0]
-            self.__y = prop[1]
-            self.__length = prop[2]
-   
-    
+            self.__x = int(prop[0])
+            self.__y = int(prop[1])
+            self.__length = int(prop[2])
+
+
 class Square(Shape):
     """
     Square  - класс, производный от Square, который описывает квадрат и
@@ -71,7 +70,7 @@ class Square(Shape):
     Реализуйте метод load, который считывает данные из заданного файла и устанавливает
     необходимые атрибуты объекта
 
-    >>> point = (10, 20)
+    >>> point=(10, 20)
     >>> length = 30
     >>> square = Square(point, length)
     >>> square.show()
@@ -88,42 +87,45 @@ class Square(Shape):
     >>> s.length
     30
     """
-     
-    def __init__(self, point, length = 0):
+
+    def __init__(self, point=(0, 0), length=0):
         self.__x = point[0]
         self.__y = point[1]
         self.__length = length
 
+
     @property
     def x(self):
-        x = self.__x
+        return self.__x
 
     @property
     def y(self):
-        y = self.__y
+        return self.__y
 
     @property
     def length(self):
-        length = self.__length
-        
-    def show(self):
-        print( 'x = ',self.__x,'y = ',self.__y,'length = ',self.__length)
+         return self.__length
 
-    def save(self,file):
+    def show(self):
+        print('Квадрат: x = {}, y = {}, length = {}'.format(self.__x, self.__y, self.__length))
+
+    def save(self, file):
         with open(file, 'w') as f:
-            to_string = str(self.__x) + '\n' +str(self.__y) + '\n' + str(self.__length)  
-            f.write(to_string)    
-          
-    def load(self,file):
+            to_string = str(self.__x) + ' ' + str(self.__y) + ' ' + str(self.__length)
+            f.write(to_string)
+
+    def load(self, file):
         with open(file) as f:
             prop = f.read()
-            self.__x = prop[0]
-            self.__y = prop[1]
-            self.__length = prop[2]
-    
-             
+            l_prop = prop.split()
+            self.__x = int(l_prop[0])
+            self.__y = int(l_prop[1])
+            self.__length = int(l_prop[2])
+
 
 if __name__ == "__main__":
     testmod()
+
+
 
 
