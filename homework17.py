@@ -1,3 +1,5 @@
+##Арєп’єв Євген
+##homework17
 import math
 
 class Circle:
@@ -77,52 +79,50 @@ class Circle:
     >>> c.area
     50.26548245743669
     """
-    def __init__(self, d):
-        self.__diameter = d
+    def __init__(self, diameter):
+        self.__diameter = diameter
+
+    @property
+    def radius(self):
+        return self.__diameter / 2
 
     @property
     def diameter(self):
         return self.__diameter
 
     @property
-    def radius(self):
-        return self.diameter/2
-
-    @property
     def area(self):
-        return self.radius * self.radius * math.pi
+        return math.pi * self.__diameter**2 /4
 
     def __eq__(self, other):
-        return self.radius == other.radius
-
-    def __ne__(self, other):
-        return self.radius != other.radius
-
-    def __le__(self, other):
-        return self.radius <= other.radius
-
-    def __lt__(self, other):
-        return self.radius < other.radius
-
-    def __ge__(self, other):
-        return self.radius >= other.radius
+        return self.__diameter == other.__diameter
 
     def __gt__(self, other):
-        return self.radius > other.radius
+        return self.__diameter > other.__diameter
+
+    def __lt__(self, other):
+        return self.__diameter < other.__diameter
+
+    def __ge__(self, other):
+        return self.__diameter >= other.__diameter
+
+    def __le__(self, other):
+        return self.__diameter <= other.__diameter
+
+    def __str__(self):
+        return 'Коло діаметром: D = {}'.format(self.__diameter)
+
+    def __repr__(self):
+        return 'Коло діаметром: D = {}'.format(self.__diameter)
 
     def __iadd__(self, other):
-        self.__diameter += 2*other
+        self.__diameter += other *2
         return self
 
     def __isub__(self, other):
-        self.__diameter -= 2*other
-        return self
+        self.__diameter -= other *2
+        return  self
 
-    def __str__(self):
-        return "circle r = {}".format(self.radius)
-
-    def __repr__(self):
-        return str(self)
 
 if __name__ == "__main__":
     import doctest
