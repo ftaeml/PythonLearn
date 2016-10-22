@@ -1,5 +1,7 @@
+##Арєп’єв Євген
+##homework18
 """
-Homework 18
+
 
 Subject: Static methods, Class methods, Iterators
 """
@@ -24,7 +26,21 @@ class MathCls:
     >>> MathCls.div(10, 2)
     5.0
     """
-    pass
+    @staticmethod
+    def add(x, y):
+        return x + y
+
+    @staticmethod
+    def sub(x, y):
+        return x - y
+
+    @staticmethod
+    def mult(x, y):
+        return x * y
+
+    @staticmethod
+    def div(x, y):
+        return x / y
 
 
 class SquareIterator:
@@ -53,7 +69,19 @@ class SquareIterator:
     ...
     StopIteration
     """
-    pass
+    def __init__(self, count = 10):
+        self.count = count
+        self.idx = -1
+
+    def __iter__(self):
+        return  self
+
+    def __next__(self):
+        if self.idx == self.count:
+            raise StopIteration
+        else:
+            self.idx += 1
+            return  self.idx **2
 
 
 class Range:
@@ -101,8 +129,26 @@ class Range:
     ...
     StopIteration
     """
-    pass
+
+
+    def __init__(self, start, stop, step = 1):
+        self.start = start
+        self.stop = stop
+        self.step = step
+        self.idx = self.start -1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.idx == self.stop:
+            raise StopIteration
+        else:
+            self.idx += 1
+            return  self.idx
+
 
 if __name__ == "__main__":
     import doctest
     doctest.testmod(verbose=True)
+
